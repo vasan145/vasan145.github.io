@@ -1,1 +1,290 @@
+<!DOCTYPE html>
 
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vasan M — Software Developer & AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root{--bg:#0a0a0f;--surface:#111118;--border:#1e1e2e;--accent:#00ff88;--accent2:#7c6aff;--accent3:#ff6a3d;--text:#e8e8f0;--muted:#6b6b80;--mono:'Space Mono',monospace;--sans:'Syne',sans-serif;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden;}
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(0,255,136,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,136,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(16px);background:rgba(10,10,15,0.7);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:var(--mono);font-size:0.85rem;color:var(--accent);}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:0.75rem;color:var(--muted);text-decoration:none;text-transform:uppercase;transition:color 0.2s;}
+.nav-links a:hover{color:var(--accent);}
+#hero{min-height:100vh;display:flex;align-items:center;padding:8rem 2.5rem 4rem;position:relative;z-index:1;}
+.hero-inner{max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.hero-badge{font-family:var(--mono);font-size:0.7rem;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;display:flex;align-items:center;gap:0.5rem;margin-bottom:1.5rem;}
+.hero-badge::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+.hero-name{font-size:clamp(3.5rem,7vw,6rem);font-weight:800;line-height:0.95;letter-spacing:-0.03em;margin-bottom:1rem;}
+.hero-name span{display:block;color:transparent;-webkit-text-stroke:1px rgba(232,232,240,0.3);}
+.hero-role{font-family:var(--mono);font-size:1rem;color:var(--accent2);margin-bottom:1.5rem;}
+.hero-desc{font-size:1rem;color:var(--muted);line-height:1.7;max-width:480px;margin-bottom:2.5rem;}
+.hero-cta{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn{font-family:var(--mono);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.85rem 1.8rem;border-radius:3px;text-decoration:none;transition:all 0.2s;}
+.btn-primary{background:var(--accent);color:#0a0a0f;font-weight:700;}
+.btn-primary:hover{background:#00cc6a;transform:translateY(-2px);}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border);}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+.terminal{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.terminal-bar{background:#1a1a24;padding:0.75rem 1rem;display:flex;align-items:center;gap:0.5rem;}
+.dot{width:10px;height:10px;border-radius:50%;}
+.dot-r{background:#ff5f57;}.dot-y{background:#febc2e;}.dot-g{background:#28c840;}
+.terminal-title{font-family:var(--mono);font-size:0.7rem;color:var(--muted);margin-left:auto;}
+.terminal-body{padding:1.5rem;font-family:var(--mono);font-size:0.78rem;line-height:2;}
+.t-prompt{color:var(--accent);}.t-key{color:var(--accent2);}.t-val{color:var(--accent3);}.t-str{color:#ffd700;}.t-comment{color:var(--muted);}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border);}
+.stat-item{padding:1.2rem 0;text-align:center;border-right:1px solid var(--border);}
+.stat-item:last-child{border-right:none;}
+.stat-num{font-size:1.6rem;font-weight:800;color:var(--accent);display:block;}
+.stat-label{font-family:var(--mono);font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;}
+section{position:relative;z-index:1;padding:6rem 2.5rem;}
+.section-inner{max-width:1200px;margin:0 auto;}
+.section-label{font-family:var(--mono);font-size:0.7rem;color:var(--accent);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.75rem;}
+.section-label::before{content:'';width:30px;height:1px;background:var(--accent);}
+.section-title{font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-0.02em;margin-bottom:3rem;}
+#skills{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;}
+.skill-category{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:1.5rem;transition:border-color 0.3s,transform 0.3s;}
+.skill-category:hover{border-color:rgba(0,255,136,0.2);transform:translateY(-3px);}
+.skill-cat-label{font-family:var(--mono);font-size:0.65rem;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1rem;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:0.5rem;}
+.tag{font-family:var(--mono);font-size:0.7rem;color:var(--text);background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:3px;padding:0.3rem 0.65rem;transition:all 0.2s;}
+.tag:hover{background:rgba(0,255,136,0.1);border-color:var(--accent);color:var(--accent);}
+.projects-list{display:flex;flex-direction:column;gap:2rem;}
+.project-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:2.5rem;display:grid;grid-template-columns:auto 1fr auto;gap:2.5rem;align-items:start;transition:border-color 0.3s,transform 0.3s;}
+.project-card:hover{border-color:rgba(0,255,136,0.25);transform:translateY(-3px);}
+.project-num{font-family:var(--mono);font-size:0.7rem;color:var(--accent);padding-top:0.3rem;}
+.project-title{font-size:1.4rem;font-weight:700;margin-bottom:0.4rem;}
+.project-subtitle{font-family:var(--mono);font-size:0.72rem;color:var(--accent2);margin-bottom:1rem;}
+.project-desc{font-size:0.9rem;color:var(--muted);line-height:1.7;margin-bottom:1.2rem;}
+.project-metric{font-family:var(--mono);font-size:0.8rem;color:var(--accent);padding:1rem;background:rgba(0,255,136,0.06);border:1px solid rgba(0,255,136,0.15);border-radius:6px;text-align:right;white-space:nowrap;}
+.project-metric strong{display:block;font-size:1.5rem;letter-spacing:-0.03em;margin-bottom:0.2rem;}
+#experience{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.exp-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:2rem 2.5rem;display:grid;grid-template-columns:1fr auto;gap:2rem;}
+.exp-role{font-size:1.2rem;font-weight:700;margin-bottom:0.3rem;}
+.exp-org{font-family:var(--mono);font-size:0.75rem;color:var(--accent2);margin-bottom:1.2rem;}
+.exp-list{list-style:none;display:flex;flex-direction:column;gap:0.6rem;}
+.exp-list li{font-size:0.9rem;color:var(--muted);padding-left:1.2rem;position:relative;line-height:1.6;}
+.exp-list li::before{content:'▸';position:absolute;left:0;color:var(--accent);font-size:0.7rem;top:0.2rem;}
+.exp-period{font-family:var(--mono);font-size:0.7rem;color:var(--muted);white-space:nowrap;padding-top:0.2rem;}
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;}
+.cert-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:1.5rem;display:flex;gap:1.2rem;align-items:flex-start;transition:all 0.3s;}
+.cert-card:hover{border-color:rgba(0,255,136,0.2);transform:translateY(-2px);}
+.cert-logo{width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:0.65rem;font-weight:700;flex-shrink:0;}
+.cert-logo.ibm{background:rgba(30,80,255,0.15);color:#4a7fff;border:1px solid rgba(30,80,255,0.2);}
+.cert-logo.ggl{background:rgba(255,100,50,0.15);color:var(--accent3);border:1px solid rgba(255,100,50,0.2);}
+.cert-logo.aws{background:rgba(255,153,0,0.15);color:#ff9900;border:1px solid rgba(255,153,0,0.2);}
+.cert-name{font-size:0.85rem;font-weight:600;margin-bottom:0.3rem;line-height:1.4;}
+.cert-issuer{font-family:var(--mono);font-size:0.65rem;color:var(--muted);}
+#contact{border-top:1px solid var(--border);}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+.contact-text{font-size:1.05rem;color:var(--muted);line-height:1.7;margin-bottom:2rem;}
+.contact-links{display:flex;flex-direction:column;gap:0.9rem;}
+.contact-link{display:flex;align-items:center;gap:1rem;text-decoration:none;color:var(--text);transition:color 0.2s;font-size:0.9rem;}
+.contact-link:hover{color:var(--accent);}
+.link-icon{font-family:var(--mono);font-size:0.65rem;color:var(--accent);width:60px;flex-shrink:0;}
+.status-box{background:var(--surface);border:1px solid rgba(0,255,136,0.2);border-radius:8px;padding:2rem;}
+.status-indicator{display:flex;align-items:center;gap:0.6rem;font-family:var(--mono);font-size:0.7rem;color:var(--accent);text-transform:uppercase;margin-bottom:1rem;}
+.status-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite;}
+.status-title{font-size:1.5rem;font-weight:700;margin-bottom:0.5rem;}
+.status-sub{font-family:var(--mono);font-size:0.75rem;color:var(--muted);margin-bottom:1.5rem;}
+.wa-btn{display:inline-flex;align-items:center;gap:0.6rem;background:#25d366;color:#fff;font-family:var(--mono);font-size:0.75rem;font-weight:700;text-transform:uppercase;padding:0.85rem 1.6rem;border-radius:4px;text-decoration:none;transition:all 0.2s;}
+.wa-btn:hover{background:#1ebe5b;transform:translateY(-2px);}
+footer{border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;}
+footer span{font-family:var(--mono);font-size:0.7rem;color:var(--muted);}
+footer a{color:var(--accent);text-decoration:none;}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+@media(max-width:768px){
+.nav-links{display:none;}
+.hero-inner{grid-template-columns:1fr;gap:2rem;}
+.project-card{grid-template-columns:1fr;gap:1rem;}
+.contact-grid{grid-template-columns:1fr;gap:2rem;}
+section{padding:4rem 1.2rem;}
+.exp-card{grid-template-columns:1fr;}
+.stats-row{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<nav>
+<div class="nav-logo">vasan.dev</div>
+<ul class="nav-links">
+<li><a href="#skills">Skills</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#experience">Experience</a></li>
+<li><a href="#certifications">Certs</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+<section id="hero">
+<div class="hero-inner">
+<div>
+<div class="hero-badge">Available for opportunities</div>
+<h1 class="hero-name">Vasan<span>M.</span></h1>
+<div class="hero-role">// Software Developer &amp; AI</div>
+<p class="hero-desc">Fresher with hands-on academic experience in Data Engineering and AI — building cloud-based intelligent systems, data pipelines, and ML models. B.Tech in AI &amp; Data Science, Karpagam Institute of Technology. Graduating 2026.</p>
+<div class="hero-cta">
+<a href="#projects" class="btn btn-primary">View Projects</a>
+<a href="#contact" class="btn btn-ghost">Get in Touch</a>
+</div>
+</div>
+<div class="terminal">
+<div class="terminal-bar">
+<span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+<span class="terminal-title">vasan@dev ~ zsh</span>
+</div>
+<div class="terminal-body">
+<div><span class="t-prompt">vasan@dev</span> ~$ whoami</div>
+<div><span class="t-comment">vasan_m</span></div>
+<div>&nbsp;</div>
+<div><span class="t-prompt">vasan@dev</span> ~$ cat profile.json</div>
+<div>{</div>
+<div>&nbsp;&nbsp;<span class="t-key">"role"</span>: <span class="t-str">"Software Developer &amp; AI"</span>,</div>
+<div>&nbsp;&nbsp;<span class="t-key">"stack"</span>: [<span class="t-str">"Python"</span>, <span class="t-str">"Spark"</span>],</div>
+<div>&nbsp;&nbsp;<span class="t-key">"cloud"</span>: <span class="t-str">"AWS"</span>,</div>
+<div>&nbsp;&nbsp;<span class="t-key">"cgpa"</span>: <span class="t-val">7.5</span>,</div>
+<div>&nbsp;&nbsp;<span class="t-key">"status"</span>: <span class="t-str">"open_to_work"</span></div>
+<div>}</div>
+</div>
+<div class="stats-row">
+<div class="stat-item"><span class="stat-num">3+</span><span class="stat-label">Projects</span></div>
+<div class="stat-item"><span class="stat-num">4</span><span class="stat-label">Certs</span></div>
+<div class="stat-item"><span class="stat-num">92%</span><span class="stat-label">IDS Acc.</span></div>
+<div class="stat-item"><span class="stat-num">2026</span><span class="stat-label">Graduate</span></div>
+</div>
+</div>
+</div>
+</section>
+<section id="skills">
+<div class="section-inner">
+<div class="section-label">Technical Stack</div>
+<h2 class="section-title reveal">Skills &amp; Technologies</h2>
+<div class="skills-grid reveal">
+<div class="skill-category"><div class="skill-cat-label">AI / ML</div><div class="skill-tags"><span class="tag">Scikit-learn</span><span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">Seaborn</span><span class="tag">DEAP</span></div></div>
+<div class="skill-category"><div class="skill-cat-label">Languages</div><div class="skill-tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">JavaScript</span><span class="tag">Scala</span></div></div>
+<div class="skill-category"><div class="skill-cat-label">Big Data</div><div class="skill-tags"><span class="tag">Apache Spark</span><span class="tag">PySpark</span><span class="tag">Hadoop HDFS</span><span class="tag">MapReduce</span></div></div>
+<div class="skill-category"><div class="skill-cat-label">Databases</div><div class="skill-tags"><span class="tag">PostgreSQL</span><span class="tag">MongoDB</span><span class="tag">MySQL</span></div></div>
+<div class="skill-category"><div class="skill-cat-label">Cloud &amp; DevOps</div><div class="skill-tags"><span class="tag">AWS S3</span><span class="tag">AWS EC2</span><span class="tag">AWS Lambda</span><span class="tag">Docker</span><span class="tag">REST APIs</span></div></div>
+</div>
+</div>
+</section>
+<section id="projects">
+<div class="section-inner">
+<div class="section-label">Featured Work</div>
+<h2 class="section-title reveal">Projects</h2>
+<div class="projects-list">
+<div class="project-card reveal">
+<div class="project-num">01</div>
+<div>
+<div class="project-title">AI-Driven Intrusion Detection System</div>
+<div class="project-subtitle">IDS · Cloud-Deployed · Real-Time</div>
+<p class="project-desc">Cloud-deployed IDS using DFA logic to detect malware, DoS, and unauthorized access in real time. Built high-throughput traffic classification pipeline; cut model reload latency by 60% via serialization.</p>
+<div class="skill-tags"><span class="tag">Python</span><span class="tag">JavaScript</span><span class="tag">MongoDB</span><span class="tag">Cloud</span><span class="tag">Pandas</span><span class="tag">NumPy</span></div>
+</div>
+<div class="project-metric"><strong>92%+</strong>Accuracy<br/>&lt;5% False Positives</div>
+</div>
+<div class="project-card reveal">
+<div class="project-num">02</div>
+<div>
+<div class="project-title">Multi-Objective Vehicle Routing Optimization</div>
+<div class="project-subtitle">VRP · Genetic Algorithms · Scalable</div>
+<p class="project-desc">Solved VRP with multi-objective fitness function using Genetic Algorithms across 10+ test scenarios. Scalable to 20+ vehicles and 100+ nodes in sub-minute runtimes.</p>
+<div class="skill-tags"><span class="tag">Python</span><span class="tag">DEAP</span><span class="tag">NumPy</span><span class="tag">Genetic Algorithms</span></div>
+</div>
+<div class="project-metric"><strong>18-25%</strong>Distance Reduction</div>
+</div>
+<div class="project-card reveal">
+<div class="project-num">03</div>
+<div>
+<div class="project-title">Alexa Voice-Controlled Automation</div>
+<div class="project-subtitle">AVS · Serverless · Multi-Device</div>
+<p class="project-desc">Production-grade Alexa Skills with intent schemas and multi-turn dialog models. Serverless AWS Lambda handlers with fallback flows across Echo Dot, Echo Show, and mobile.</p>
+<div class="skill-tags"><span class="tag">Python</span><span class="tag">AWS Lambda</span><span class="tag">REST APIs</span><span class="tag">Serverless</span></div>
+</div>
+<div class="project-metric"><strong>10+</strong>Tasks Automated</div>
+</div>
+</div>
+</div>
+</section>
+<section id="experience">
+<div class="section-inner">
+<div class="section-label">Work History</div>
+<h2 class="section-title reveal">Experience</h2>
+<div class="exp-card reveal">
+<div>
+<div class="exp-role">Data Engineer (Academic)</div>
+<div class="exp-org">Karpagam Institute of Technology</div>
+<ul class="exp-list">
+<li>Designed data pipelines using Apache Spark, PySpark, and Hadoop</li>
+<li>Worked with PostgreSQL, MongoDB, MySQL for storage &amp; optimization</li>
+<li>Created ETL pipelines and data warehousing solutions with Pandas/NumPy</li>
+<li>Applied IBM-certified knowledge in Big Data, ETL, data governance on AWS</li>
+</ul>
+</div>
+<div class="exp-period">2022 – 2026</div>
+</div>
+</div>
+</section>
+<section id="certifications">
+<div class="section-inner">
+<div class="section-label">Credentials</div>
+<h2 class="section-title reveal">Certifications</h2>
+<div class="certs-grid reveal">
+<div class="cert-card"><div class="cert-logo ibm">IBM</div><div><div class="cert-name">Intro to Big Data with Apache Spark &amp; Hadoop</div><div class="cert-issuer">IBM · PySpark, HDFS, MapReduce</div></div></div>
+<div class="cert-card"><div class="cert-logo ibm">IBM</div><div><div class="cert-name">Introduction to Data Engineering</div><div class="cert-issuer">IBM · ETL pipelines, warehousing, governance</div></div></div>
+<div class="cert-card"><div class="cert-logo ggl">GGL</div><div><div class="cert-name">Data Analytics Professional Certificate</div><div class="cert-issuer">Google · SQL, Tableau, R, data storytelling</div></div></div>
+<div class="cert-card"><div class="cert-logo aws">AWS</div><div><div class="cert-name">AWS Cloud Practitioner</div><div class="cert-issuer">Self-learned · IAM, S3, EC2, Lambda, VPC</div></div></div>
+</div>
+</div>
+</section>
+<section id="contact">
+<div class="section-inner">
+<div class="section-label">Get in Touch</div>
+<h2 class="section-title reveal">Let's Connect</h2>
+<div class="contact-grid">
+<div class="reveal">
+<p class="contact-text">I'm open to full-time roles, internships, and interesting AI/Software Development projects. Feel free to reach out!</p>
+<div class="contact-links">
+<a href="mailto:mvasan056@gmail.com" class="contact-link"><span class="link-icon">EMAIL</span><span>mvasan056@gmail.com</span></a>
+<a href="tel:+919003602898" class="contact-link"><span class="link-icon">PHONE</span><span>+91 9003602898</span></a>
+<a href="https://linkedin.com/in/vasan045" class="contact-link" target="_blank"><span class="link-icon">LINKEDIN</span><span>linkedin.com/in/vasan045</span></a>
+<a href="https://github.com/vasan145" class="contact-link" target="_blank"><span class="link-icon">GITHUB</span><span>github.com/vasan145</span></a>
+<a href="#" class="contact-link"><span class="link-icon">LOC</span><span>Coimbatore, Tamil Nadu, India</span></a>
+</div>
+</div>
+<div class="reveal">
+<div class="status-box">
+<div class="status-indicator"><span class="status-dot"></span>Available Now</div>
+<div class="status-title">Actively Looking</div>
+<div class="status-sub">Fresher · Graduating 2026 · Open to Relocation</div>
+<a href="https://wa.me/919003602898" class="wa-btn" target="_blank">Message on WhatsApp</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<footer>
+<span>Built with ♥ by <a href="#">VASAN M</a> · Software Developer &amp; AI</span>
+<span><a href="https://github.com/vasan145" target="_blank">github.com/vasan145</a> · <a href="https://linkedin.com/in/vasan045" target="_blank">linkedin.com/in/vasan045</a></span>
+</footer>
+<script>
+const reveals=document.querySelectorAll('.reveal');
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});
+},{threshold:0.12});
+reveals.forEach(r=>observer.observe(r));
+</script>
+</body>
+</html>
